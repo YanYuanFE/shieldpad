@@ -1,0 +1,31 @@
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: https://api.testnet.hiro.so
+bitcoin-node: http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332
+plan:
+  batches:
+  - id: 0
+    transactions:
+    - transaction-type: contract-publish
+      contract-name: shield-token
+      expected-sender: STNHK269Z9CXFQTY1G2TYV3TXTRC6477F691TRG0
+      cost: 998434
+      path: contracts/shield-token.clar
+      anchor-block-only: true
+      clarity-version: 4
+    - transaction-type: contract-publish
+      contract-name: shield-amm
+      expected-sender: STNHK269Z9CXFQTY1G2TYV3TXTRC6477F691TRG0
+      cost: 1002011
+      path: contracts/shield-amm.clar
+      anchor-block-only: true
+      clarity-version: 4
+    - transaction-type: contract-publish
+      contract-name: shield-registry
+      expected-sender: STNHK269Z9CXFQTY1G2TYV3TXTRC6477F691TRG0
+      cost: 997784
+      path: contracts/shield-registry.clar
+      anchor-block-only: true
+      clarity-version: 4
+    epoch: '3.3'
