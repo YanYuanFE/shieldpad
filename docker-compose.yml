@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: shieldpad-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      STACKS_NETWORK: ${STACKS_NETWORK}
+      DEPLOYER_ADDRESS: ${DEPLOYER_ADDRESS}
+      DEPLOYER_KEY: ${DEPLOYER_KEY}
+      HIRO_API_KEY: ${HIRO_API_KEY}
+      AMM_CONTRACT_NAME: shield-amm
+      REGISTRY_CONTRACT_NAME: shield-registry
+      TOKEN_TEMPLATE_PATH: /app/contracts/shield-token.clar
+    networks:
+      - dokploy-network
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: shieldpad-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
